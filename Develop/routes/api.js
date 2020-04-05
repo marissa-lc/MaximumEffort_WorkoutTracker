@@ -9,15 +9,15 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workout/:id", (req, res) => {
+router.put("/api/workouts/:id", ({body, params}, res) => {
         Workout.findByIdAndUpdate(
             params.id, 
-            {$push: {excercises: body}},
+            {$push: {exercises: body}},
             {new: true, runValidators: true}
             ).then(dbWorkouts => {
                 res.json(dbWorkouts);
             }).catch(err => {
-                res.json(dbWorkouts);
+                res.json(err);
             });
 });
 
